@@ -3,19 +3,26 @@ from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
-class RegisterRequest(BaseModel):
-    full_name: str
-    username: str
-    email: EmailStr
-    password: str
-    role: str
-    company_id: int
-    store_id: Optional[int] = None
-
-
 class LoginRequest(BaseModel):
-    email: EmailStr
+    username_or_email: str
     password: str
+
+
+class TokenRefreshRequest(BaseModel):
+    refresh_token: str
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+
+
+class MessageResponse(BaseModel):
+    message: str
 
 
 class UserResponse(BaseModel):
@@ -24,13 +31,17 @@ class UserResponse(BaseModel):
     username: str
     email: EmailStr
     role: str
-    company_id: int
+    company_id: Optional[int]
     store_id: Optional[int]
     is_super_admin: bool
+    is_active: bool
+
+    class Config:
+        from_attributes = True
 
 
-class LoginResponse(BaseModel):
-    success: bool
+class TokenResponse(BaseModel):
     access_token: str
+    refresh_token: str
     token_type: str
     user: UserResponse

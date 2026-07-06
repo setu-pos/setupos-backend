@@ -1,30 +1,30 @@
+from typing import Optional
+
 from pydantic import BaseModel, EmailStr
 
-
-class LoginRequest(BaseModel):
-    email: EmailStr
-    password: str
+from app.models.user import UserRole
 
 
-class LoginResponse(BaseModel):
-    access_token: str
-    token_type: str = "bearer"
-
-
-class RegisterRequest(BaseModel):
+class UserCreate(BaseModel):
     full_name: str
+    username: str
     email: EmailStr
     password: str
-    role: str
-    company_id: int
-    store_id: int
+    role: UserRole = UserRole.EMPLOYEE
+    company_id: Optional[int] = None
+    store_id: Optional[int] = None
 
 
 class UserResponse(BaseModel):
     id: int
     full_name: str
+    username: str
     email: EmailStr
-    role: str
+    role: UserRole
+    company_id: Optional[int]
+    store_id: Optional[int]
+    is_super_admin: bool
+    is_active: bool
 
     class Config:
         from_attributes = True

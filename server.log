@@ -1,9 +1,41 @@
 nohup: ignoring input
-INFO:     Started server process [1373]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8081 (Press CTRL+C to quit)
-INFO:     127.0.0.1:33792 - "GET /auth/health HTTP/1.1" 200 OK
-own.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [1366]
+Traceback (most recent call last):
+  File "/root/setupos-backend/backend/venv/bin/uvicorn", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/click/core.py", line 1569, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/click/core.py", line 1490, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/click/core.py", line 1353, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/click/core.py", line 907, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/uvicorn/main.py", line 440, in main
+    run(
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/uvicorn/main.py", line 609, in run
+    config.load_app()
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/uvicorn/config.py", line 427, in load_app
+    return import_from_string(self.app)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/setupos-backend/backend/venv/lib/python3.12/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/root/setupos-backend/backend/app/main.py", line 5, in <module>
+    from app.routes.auth import router as auth_router
+  File "/root/setupos-backend/backend/app/routes/auth.py", line 15, in <module>
+    from app.auth.security import (
+ImportError: cannot import name 'create_refresh_token' from 'app.auth.security' (/root/setupos-backend/backend/app/auth/security.py). Did you mean: 'create_access_token'?
